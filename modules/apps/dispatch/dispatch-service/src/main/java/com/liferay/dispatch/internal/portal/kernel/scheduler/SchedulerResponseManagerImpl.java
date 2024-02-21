@@ -143,6 +143,8 @@ public class SchedulerResponseManagerImpl implements SchedulerResponseManager {
 			StorageType storageType)
 		throws SchedulerException {
 
+		System.out.print("Hey");
+
 		_schedulerEngineHelper.run(companyId, jobName, groupName, storageType);
 	}
 
