@@ -23,7 +23,6 @@ import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
-import org.osgi.service.component.annotations.Reference;
 import org.osgi.util.tracker.BundleTracker;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 
@@ -104,9 +103,6 @@ public class LanguageExtender
 
 	private BundleContext _bundleContext;
 	private BundleTracker<?> _bundleTracker;
-
-	@Reference
-	private LanguageResources _languageResources;
 
 	private final ServiceListener _serviceListener =
 		serviceEvent -> CacheResourceBundleLoader.clearCache();
