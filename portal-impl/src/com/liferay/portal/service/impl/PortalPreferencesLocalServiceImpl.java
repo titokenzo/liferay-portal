@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.PortalPreferenceValueLocalService;
 import com.liferay.portal.kernel.service.persistence.PortalPreferenceValuePersistence;
 import com.liferay.portal.kernel.util.PortletKeys;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.base.PortalPreferencesLocalServiceBaseImpl;
 import com.liferay.portlet.PortalPreferenceKey;
@@ -134,16 +135,29 @@ public class PortalPreferencesLocalServiceImpl
 		// This is counterintuitive but it is actually better for performance.
 		// See LPS-196350 and 2cd9801d2a243ecbc5c1025b614c9300ce53627d.
 
-		for (PortalPreferences portalPreferences :
+		PortalPreferences portalPreferences = null;
+
+		int countFoundKeys = 0;
+
+		for (PortalPreferences currentPortalPreferences :
 				portalPreferencesPersistence.findByOwnerType(
 					PortletKeys.PREFS_OWNER_TYPE_COMPANY)) {
 
-			if (portalPreferences.getOwnerId() == companyId) {
-				return portalPreferences;
+			if (currentPortalPreferences.getOwnerId() == companyId) {
+				portalPreferences = currentPortalPreferences;
+
+				countFoundKeys++;
 			}
 		}
 
-		return null;
+		if((countFoundKeys>1) && (_log.isWarnEnabled())) {
+			_log.warn(
+				"PortalPreferencesLocalServiceImpl.fetchCompanyPortalPreferences(long) with parameter (" +
+				companyId +
+				") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+		}
+
+		return portalPreferences;
 	}
 
 	@Override
