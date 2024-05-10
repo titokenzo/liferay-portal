@@ -47,8 +47,7 @@ public class PortalPreferencesLocalServiceImpl
 	public PortalPreferences addPortalPreferences(
 		long ownerId, int ownerType, String defaultPreferences) {
 
-		PortalPreferences previousPortalPreferences =
-			portalPreferencesPersistence.fetchByO_O(ownerId, ownerType);
+		PortalPreferences previousPortalPreferences = fetchPortalPreferences(ownerId, ownerType);
 
 		if (previousPortalPreferences != null) {
 			throw new IllegalArgumentException(
@@ -151,10 +150,10 @@ public class PortalPreferencesLocalServiceImpl
 		}
 
 		if((countFoundKeys>1) && (_log.isWarnEnabled())) {
-			_log.warn(
-				"PortalPreferencesLocalServiceImpl.fetchCompanyPortalPreferences(long) with parameter (" +
-				companyId +
-				") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+				_log.warn(
+					"PortalPreferencesLocalServiceImpl.fetchCompanyPortalPreferences(long) with parameter (" +
+					companyId +
+					") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 		}
 
 		return portalPreferences;
@@ -164,7 +163,18 @@ public class PortalPreferencesLocalServiceImpl
 	public PortalPreferences fetchPortalPreferences(
 		long ownerId, int ownerType) {
 
-		return portalPreferencesPersistence.fetchByO_O(ownerId, ownerType);
+		PortalPreferences portalPreferences;
+
+		if(ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+			portalPreferences =
+				fetchCompanyPortalPreferences(ownerId);
+		}
+		else{
+			portalPreferences =
+				portalPreferencesPersistence.fetchByO_O(ownerId, ownerType);
+		}
+
+		return portalPreferences;
 	}
 
 	@Override
@@ -176,8 +186,7 @@ public class PortalPreferencesLocalServiceImpl
 	public PortletPreferences getPreferences(
 		long ownerId, int ownerType, String defaultPreferences) {
 
-		PortalPreferences portalPreferences =
-			portalPreferencesPersistence.fetchByO_O(ownerId, ownerType);
+		PortalPreferences portalPreferences = fetchPortalPreferences(ownerId, ownerType);
 
 		if (portalPreferences == null) {
 			portalPreferences =
@@ -221,8 +230,8 @@ public class PortalPreferencesLocalServiceImpl
 		long ownerId, int ownerType,
 		Map<PortalPreferenceKey, String[]> preferencesMap) {
 
-		PortalPreferences portalPreferencesModel =
-			portalPreferencesPersistence.fetchByO_O(ownerId, ownerType);
+		PortalPreferences portalPreferencesModel = fetchPortalPreferences(
+			ownerId, ownerType);
 
 		Map<PortalPreferenceKey, List<PortalPreferenceValue>>
 			portalPreferenceValuesMap = Collections.emptyMap();
