@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.PortalPreferenceValueLocalService;
 import com.liferay.portal.kernel.service.persistence.PortalPreferenceValuePersistence;
 import com.liferay.portal.kernel.util.PortletKeys;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.base.PortalPreferencesLocalServiceBaseImpl;
 import com.liferay.portlet.PortalPreferenceKey;
@@ -47,7 +46,8 @@ public class PortalPreferencesLocalServiceImpl
 	public PortalPreferences addPortalPreferences(
 		long ownerId, int ownerType, String defaultPreferences) {
 
-		PortalPreferences previousPortalPreferences = fetchPortalPreferences(ownerId, ownerType);
+		PortalPreferences previousPortalPreferences = fetchPortalPreferences(
+			ownerId, ownerType);
 
 		if (previousPortalPreferences != null) {
 			throw new IllegalArgumentException(
@@ -149,11 +149,11 @@ public class PortalPreferencesLocalServiceImpl
 			}
 		}
 
-		if((countFoundKeys>1) && (_log.isWarnEnabled())) {
-				_log.warn(
-					"PortalPreferencesLocalServiceImpl.fetchCompanyPortalPreferences(long) with parameter (" +
+		if ((countFoundKeys > 1) && _log.isWarnEnabled()) {
+			_log.warn(
+				"PortalPreferencesLocalServiceImpl.fetchCompanyPortalPreferences(long) with parameter (" +
 					companyId +
-					") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 		}
 
 		return portalPreferences;
@@ -165,13 +165,12 @@ public class PortalPreferencesLocalServiceImpl
 
 		PortalPreferences portalPreferences;
 
-		if(ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
-			portalPreferences =
-				fetchCompanyPortalPreferences(ownerId);
+		if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+			portalPreferences = fetchCompanyPortalPreferences(ownerId);
 		}
-		else{
-			portalPreferences =
-				portalPreferencesPersistence.fetchByO_O(ownerId, ownerType);
+		else {
+			portalPreferences = portalPreferencesPersistence.fetchByO_O(
+				ownerId, ownerType);
 		}
 
 		return portalPreferences;
@@ -186,7 +185,8 @@ public class PortalPreferencesLocalServiceImpl
 	public PortletPreferences getPreferences(
 		long ownerId, int ownerType, String defaultPreferences) {
 
-		PortalPreferences portalPreferences = fetchPortalPreferences(ownerId, ownerType);
+		PortalPreferences portalPreferences = fetchPortalPreferences(
+			ownerId, ownerType);
 
 		if (portalPreferences == null) {
 			portalPreferences =
