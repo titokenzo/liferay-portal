@@ -13,12 +13,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  */
 public class AssetTagCountComparator extends OrderByComparator<AssetTag> {
 
-	public static final String ORDER_BY_ASC = "AssetTag.assetCount ASC";
-
-	public static final String ORDER_BY_DESC = "AssetTag.assetCount DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"assetCount"};
-
 	public static AssetTagCountComparator getInstance(boolean ascending) {
 		if (ascending) {
 			return _INSTANCE_ASCENDING;
@@ -48,15 +42,15 @@ public class AssetTagCountComparator extends OrderByComparator<AssetTag> {
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -73,6 +67,12 @@ public class AssetTagCountComparator extends OrderByComparator<AssetTag> {
 
 	private static final AssetTagCountComparator _INSTANCE_DESCENDING =
 		new AssetTagCountComparator(false);
+
+	private static final String _ORDER_BY_ASC = "AssetTag.assetCount ASC";
+
+	private static final String _ORDER_BY_DESC = "AssetTag.assetCount DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"assetCount"};
 
 	private final boolean _ascending;
 
