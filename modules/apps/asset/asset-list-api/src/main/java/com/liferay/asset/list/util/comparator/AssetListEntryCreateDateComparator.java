@@ -15,12 +15,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class AssetListEntryCreateDateComparator
 	extends OrderByComparator<AssetListEntry> {
 
-	public static final String ORDER_BY_ASC = "AssetListEntry.name ASC";
-
-	public static final String ORDER_BY_DESC = "AssetListEntry.name DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"createDate"};
-
 	public static AssetListEntryCreateDateComparator getInstance(
 		boolean ascending) {
 
@@ -48,15 +42,15 @@ public class AssetListEntryCreateDateComparator
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -73,6 +67,12 @@ public class AssetListEntryCreateDateComparator
 
 	private static final AssetListEntryCreateDateComparator
 		_INSTANCE_DESCENDING = new AssetListEntryCreateDateComparator(false);
+
+	private static final String _ORDER_BY_ASC = "AssetListEntry.name ASC";
+
+	private static final String _ORDER_BY_DESC = "AssetListEntry.name DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"createDate"};
 
 	private final boolean _ascending;
 
