@@ -14,14 +14,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class AssetListEntrySegmentsEntryRelPriorityComparator
 	extends OrderByComparator<AssetListEntrySegmentsEntryRel> {
 
-	public static final String ORDER_BY_ASC =
-		"AssetListEntrySegmentsEntryRel.priority ASC";
-
-	public static final String ORDER_BY_DESC =
-		"AssetListEntrySegmentsEntryRel.priority DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"priority"};
-
 	public static AssetListEntrySegmentsEntryRelPriorityComparator getInstance(
 		boolean ascending) {
 
@@ -51,15 +43,15 @@ public class AssetListEntrySegmentsEntryRelPriorityComparator
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -80,6 +72,14 @@ public class AssetListEntrySegmentsEntryRelPriorityComparator
 	private static final AssetListEntrySegmentsEntryRelPriorityComparator
 		_INSTANCE_DESCENDING =
 			new AssetListEntrySegmentsEntryRelPriorityComparator(false);
+
+	private static final String _ORDER_BY_ASC =
+		"AssetListEntrySegmentsEntryRel.priority ASC";
+
+	private static final String _ORDER_BY_DESC =
+		"AssetListEntrySegmentsEntryRel.priority DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"priority"};
 
 	private final boolean _ascending;
 
