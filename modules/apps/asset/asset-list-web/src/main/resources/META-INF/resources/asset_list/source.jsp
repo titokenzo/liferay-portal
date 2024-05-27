@@ -96,7 +96,7 @@ List<Map<String, Object>> classTypesList = new ArrayList<>();
 			continue;
 		}
 
-		classTypes.sort(new ClassTypeNameComparator(true));
+		classTypes.sort(ClassTypeNameComparator.getInstance(true));
 
 		classTypesAssetRendererFactories.add(assetRendererFactory);
 

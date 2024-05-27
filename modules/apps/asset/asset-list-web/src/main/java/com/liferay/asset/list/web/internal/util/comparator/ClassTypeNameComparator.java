@@ -13,8 +13,12 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  */
 public class ClassTypeNameComparator extends OrderByComparator<ClassType> {
 
-	public ClassTypeNameComparator(boolean ascending) {
-		_ascending = ascending;
+	public static ClassTypeNameComparator getInstance(boolean ascending) {
+		if (ascending) {
+			return _INSTANCE_ASCENDING;
+		}
+
+		return _INSTANCE_DESCENDING;
 	}
 
 	@Override
@@ -30,6 +34,16 @@ public class ClassTypeNameComparator extends OrderByComparator<ClassType> {
 
 		return -value;
 	}
+
+	private ClassTypeNameComparator(boolean ascending) {
+		_ascending = ascending;
+	}
+
+	private static final ClassTypeNameComparator _INSTANCE_ASCENDING =
+		new ClassTypeNameComparator(true);
+
+	private static final ClassTypeNameComparator _INSTANCE_DESCENDING =
+		new ClassTypeNameComparator(false);
 
 	private final boolean _ascending;
 
