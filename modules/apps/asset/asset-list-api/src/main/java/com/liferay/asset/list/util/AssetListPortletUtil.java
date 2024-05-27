@@ -32,7 +32,8 @@ public class AssetListPortletUtil {
 				orderByAsc);
 		}
 		else if (orderByCol.equals("title")) {
-			orderByComparator = AssetListEntryTitleComparator.getInstance(orderByAsc);
+			orderByComparator = AssetListEntryTitleComparator.getInstance(
+				orderByAsc);
 		}
 
 		return orderByComparator;

@@ -15,15 +15,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class AssetListEntryUsageModifiedDateComparator
 	extends OrderByComparator<AssetListEntryUsage> {
 
-	public static final String ORDER_BY_ASC =
-		"AssetListEntryUsage.modifiedDate ASC";
+	public static AssetListEntryUsageModifiedDateComparator getInstance(
+		boolean ascending) {
 
-	public static final String ORDER_BY_DESC =
-		"AssetListEntryUsage.modifiedDate DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"modifiedDate"};
-
-	public static AssetListEntryUsageModifiedDateComparator getInstance(boolean ascending) {
 		if (ascending) {
 			return _INSTANCE_ASCENDING;
 		}
@@ -50,15 +44,15 @@ public class AssetListEntryUsageModifiedDateComparator
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -70,11 +64,21 @@ public class AssetListEntryUsageModifiedDateComparator
 		_ascending = ascending;
 	}
 
-	private static final AssetListEntryUsageModifiedDateComparator _INSTANCE_ASCENDING =
-		new AssetListEntryUsageModifiedDateComparator(true);
+	private static final AssetListEntryUsageModifiedDateComparator
+		_INSTANCE_ASCENDING = new AssetListEntryUsageModifiedDateComparator(
+			true);
 
-	private static final AssetListEntryUsageModifiedDateComparator _INSTANCE_DESCENDING =
-		new AssetListEntryUsageModifiedDateComparator(false);
+	private static final AssetListEntryUsageModifiedDateComparator
+		_INSTANCE_DESCENDING = new AssetListEntryUsageModifiedDateComparator(
+			false);
+
+	private static final String _ORDER_BY_ASC =
+		"AssetListEntryUsage.modifiedDate ASC";
+
+	private static final String _ORDER_BY_DESC =
+		"AssetListEntryUsage.modifiedDate DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"modifiedDate"};
 
 	private final boolean _ascending;
 
