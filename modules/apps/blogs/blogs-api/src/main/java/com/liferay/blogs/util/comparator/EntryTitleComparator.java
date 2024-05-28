@@ -13,12 +13,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  */
 public class EntryTitleComparator extends OrderByComparator<BlogsEntry> {
 
-	public static final String ORDER_BY_ASC = "BlogsEntry.title ASC";
-
-	public static final String ORDER_BY_DESC = "BlogsEntry.title DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"title"};
-
 	public static EntryTitleComparator getInstance(boolean ascending) {
 		if (ascending) {
 			return _INSTANCE_ASCENDING;
@@ -44,15 +38,15 @@ public class EntryTitleComparator extends OrderByComparator<BlogsEntry> {
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -69,6 +63,12 @@ public class EntryTitleComparator extends OrderByComparator<BlogsEntry> {
 
 	private static final EntryTitleComparator _INSTANCE_DESCENDING =
 		new EntryTitleComparator(false);
+
+	private static final String _ORDER_BY_ASC = "BlogsEntry.title ASC";
+
+	private static final String _ORDER_BY_DESC = "BlogsEntry.title DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"title"};
 
 	private final boolean _ascending;
 
