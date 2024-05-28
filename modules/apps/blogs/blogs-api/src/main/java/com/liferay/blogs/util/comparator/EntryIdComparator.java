@@ -13,14 +13,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  */
 public class EntryIdComparator extends OrderByComparator<BlogsEntry> {
 
-	public static final String ORDER_BY_ASC = "BlogsEntry.entryId ASC";
-
-	public static final String[] ORDER_BY_CONDITION_FIELDS = {"entryId"};
-
-	public static final String ORDER_BY_DESC = " BlogsEntry.entryId DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"entryId"};
-
 	public static EntryIdComparator getInstance(boolean ascending) {
 		if (ascending) {
 			return _INSTANCE_ASCENDING;
@@ -50,20 +42,20 @@ public class EntryIdComparator extends OrderByComparator<BlogsEntry> {
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByConditionFields() {
-		return ORDER_BY_CONDITION_FIELDS;
+		return _ORDER_BY_CONDITION_FIELDS;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -80,6 +72,14 @@ public class EntryIdComparator extends OrderByComparator<BlogsEntry> {
 
 	private static final EntryIdComparator _INSTANCE_DESCENDING =
 		new EntryIdComparator(false);
+
+	private static final String _ORDER_BY_ASC = "BlogsEntry.entryId ASC";
+
+	private static final String[] _ORDER_BY_CONDITION_FIELDS = {"entryId"};
+
+	private static final String _ORDER_BY_DESC = " BlogsEntry.entryId DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"entryId"};
 
 	private final boolean _ascending;
 
