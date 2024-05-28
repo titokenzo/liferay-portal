@@ -14,18 +14,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
  */
 public class EntryModifiedDateComparator extends OrderByComparator<BlogsEntry> {
 
-	public static final String ORDER_BY_ASC =
-		"BlogsEntry.modifiedDate ASC, BlogsEntry.entryId ASC";
-
-	public static final String[] ORDER_BY_CONDITION_FIELDS = {
-		"modifiedDate", "entryId"
-	};
-
-	public static final String ORDER_BY_DESC =
-		"BlogsEntry.modifiedDate DESC, BlogsEntry.entryId DESC";
-
-	public static final String[] ORDER_BY_FIELDS = {"modifiedDate", "entryId"};
-
 	public static EntryModifiedDateComparator getInstance(boolean ascending) {
 		if (ascending) {
 			return _INSTANCE_ASCENDING;
@@ -58,20 +46,20 @@ public class EntryModifiedDateComparator extends OrderByComparator<BlogsEntry> {
 	@Override
 	public String getOrderBy() {
 		if (_ascending) {
-			return ORDER_BY_ASC;
+			return _ORDER_BY_ASC;
 		}
 
-		return ORDER_BY_DESC;
+		return _ORDER_BY_DESC;
 	}
 
 	@Override
 	public String[] getOrderByConditionFields() {
-		return ORDER_BY_CONDITION_FIELDS;
+		return _ORDER_BY_CONDITION_FIELDS;
 	}
 
 	@Override
 	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
+		return _ORDER_BY_FIELDS;
 	}
 
 	@Override
@@ -88,6 +76,18 @@ public class EntryModifiedDateComparator extends OrderByComparator<BlogsEntry> {
 
 	private static final EntryModifiedDateComparator _INSTANCE_DESCENDING =
 		new EntryModifiedDateComparator(false);
+
+	private static final String _ORDER_BY_ASC =
+		"BlogsEntry.modifiedDate ASC, BlogsEntry.entryId ASC";
+
+	private static final String[] _ORDER_BY_CONDITION_FIELDS = {
+		"modifiedDate", "entryId"
+	};
+
+	private static final String _ORDER_BY_DESC =
+		"BlogsEntry.modifiedDate DESC, BlogsEntry.entryId DESC";
+
+	private static final String[] _ORDER_BY_FIELDS = {"modifiedDate", "entryId"};
 
 	private final boolean _ascending;
 
