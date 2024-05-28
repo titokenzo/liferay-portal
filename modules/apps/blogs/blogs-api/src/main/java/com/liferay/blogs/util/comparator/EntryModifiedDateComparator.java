@@ -87,7 +87,9 @@ public class EntryModifiedDateComparator extends OrderByComparator<BlogsEntry> {
 	private static final String _ORDER_BY_DESC =
 		"BlogsEntry.modifiedDate DESC, BlogsEntry.entryId DESC";
 
-	private static final String[] _ORDER_BY_FIELDS = {"modifiedDate", "entryId"};
+	private static final String[] _ORDER_BY_FIELDS = {
+		"modifiedDate", "entryId"
+	};
 
 	private final boolean _ascending;
 
