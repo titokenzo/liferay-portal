@@ -13,7 +13,12 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.SearchOrderByUtil;
 import com.liferay.portal.kernel.portlet.url.builder.PortletURLBuilder;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Eudaldo Alonso
@@ -29,6 +34,8 @@ public class LogLevelsManagementToolbarDisplayContext
 		super(
 			liferayPortletRequest.getHttpServletRequest(),
 			liferayPortletRequest, liferayPortletResponse, searchContainer);
+
+		_httpServletRequest = liferayPortletRequest.getHttpServletRequest();
 	}
 
 	@Override
@@ -40,6 +47,17 @@ public class LogLevelsManagementToolbarDisplayContext
 		).setNavigation(
 			(String)null
 		).buildString();
+	}
+
+	@Override
+	protected String getOrderByType(){
+		String orderByType = ParamUtil.get(_httpServletRequest, "orderByType","asc");
+
+		if (Validator.isNotNull(orderByType)) {
+			return orderByType;
+		}
+
+		return "asc";
 	}
 
 	@Override
@@ -69,5 +87,7 @@ public class LogLevelsManagementToolbarDisplayContext
 	public Boolean isSelectable() {
 		return false;
 	}
+
+	private HttpServletRequest _httpServletRequest;
 
 }

@@ -23,7 +23,17 @@ PortletURL searchURL = PortletURLBuilder.createRenderURL(
 
 SearchContainer<Map.Entry<String, String>> loggerSearchContainer = new SearchContainer(liferayPortletRequest, searchURL, null, null);
 
-Map<String, String> currentPriorities = new TreeMap<>();
+String orderByType = ParamUtil.getString(request, "orderByType");
+
+Map<String, String> currentPriorities = null;
+
+if (Validator.isNull(orderByType)) {
+	orderByType="asc";
+
+	currentPriorities = new TreeMap<>();
+} else {
+	currentPriorities = new TreeMap<>(Collections.reverseOrder());
+}
 
 Map<String, String> priorities = Log4JUtil.getPriorities();
 
@@ -44,6 +54,7 @@ loggerSearchContainer.setResultsAndTotal(ListUtil.fromCollection(currentPrioriti
 
 <clay:container-fluid>
 	<liferay-ui:search-container
+		orderByType="<%= orderByType %>"
 		searchContainer="<%= loggerSearchContainer %>"
 	>
 		<liferay-ui:search-container-row
